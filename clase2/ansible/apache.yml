@@ -1,0 +1,29 @@
+- hosts: apache
+  tasks:
+    - name: Instalar Apache2
+      become: true
+      apt:
+        name: apache2
+        update_cache: yes
+        state: latest
+
+    - name: Crear archivo index.html
+      become: true
+      copy:
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Mi Página Web</title>
+          </head>
+          <body>
+              <h1>Bienvenido a mi sitio web</h1>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+
+    - name: Iniciar el servicio Apache
+      become: true
+      service:
+        name: apache2
+        state: started

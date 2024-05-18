@@ -1,0 +1,9 @@
+api:
+  deploymentName: api # Nombre del Deployment de la API
+  replicas: 3         # Número de réplicas
+  image: iscoct/clase-3-go-app  # Imagen a usar
+
+db:
+  deploymentName: db
+  replicas: 1
+  image: postgres:13

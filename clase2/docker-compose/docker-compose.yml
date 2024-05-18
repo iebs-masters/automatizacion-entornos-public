@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    build: ./postgresql
+    env_file:
+      - .env
+    networks:
+      - app
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./flask-app
+    deploy:
+      replicas: 3
+    networks:
+      - app
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  nginx:
+    build: ./nginx
+    networks:
+      - app
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+networks:
+  app:
+
+volumes:
+  postgres_data:
+    driver: local

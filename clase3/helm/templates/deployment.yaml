@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: {{ .Values.api.deploymentName }} # Parametrización del nombre
+spec:
+ replicas: {{ .Values.api.replicas }} 
+ selector:
+  matchLabels:
+   app: api
+ template:
+  metadata:
+   labels:
+    app: api
+  spec:
+   containers:
+   - name: api-container
+     image: {{ .Values.api.image }}
+     ports:
+     - containerPort: 8080 
+     env:
+      - name: DB_HOST
+        valueFrom:
+          configMapKeyRef:
+            name: postgres-config
+            key: DB_HOST
+      - name: DB_NAME
+        valueFrom:
+          configMapKeyRef:
+            name: postgres-config
+            key: DB_NAME
+      - name: DB_USER
+        valueFrom:
+          secretKeyRef:
+            name: postgres-secrets
+            key: username
+      - name: DB_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: postgres-secrets
+            key: password
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: {{ .Values.db.deploymentName }}
+spec:
+ replicas: {{ .Values.db.replicas }}
+ selector:
+  matchLabels:
+   app: db
+ template:
+  metadata:
+   labels:
+    app: db
+  spec:
+   containers:
+   - name: db
+     image: {{ .Values.db.image }}
+     ports:
+     - containerPort: 5432
+     env:
+     - name: POSTGRES_USER
+       valueFrom:
+        secretKeyRef:
+          name: postgres-secrets
+          key: username
+     - name: POSTGRES_PASSWORD
+       valueFrom:
+        secretKeyRef:
+          name: postgres-secrets
+          key: password
+     - name: POSTGRES_DB
+       valueFrom:
+        configMapKeyRef:
+          name: postgres-config
+          key: DB_NAME

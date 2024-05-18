@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Juegos</title>
+</head>
+<body>
+    <h1>Lista de Juegos</h1>
+    <p>Dirección IP de la máquina: {{ machine_ip }}</p>
+    <ul>
+        {% for juego in juegos %}
+            <li>{{ juego[1] }} - {{ juego[2] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
