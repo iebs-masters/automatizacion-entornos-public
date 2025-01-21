@@ -43,8 +43,6 @@ resource "aws_instance" "my_instance" {
   ami           = "ami-00c71bd4d220aa22a" # ID de la imagen de Ubuntu Server 22
   instance_type = "t2.small" # Tipo de instancia (puedes cambiarlo según tus necesidades)
 
-  key_name = "iebs_user"
-
   # Asigna el grupo de seguridad a la instancia
   security_groups = [aws_security_group.my_security_group.name]
 }
@@ -52,8 +50,6 @@ resource "aws_instance" "my_instance" {
 resource "aws_instance" "my_instance2" {
   ami           = "ami-00c71bd4d220aa22a" # ID de la imagen de Ubuntu Server 22
   instance_type = "t2.small" # Tipo de instancia (puedes cambiarlo según tus necesidades)
-
-  key_name = "iebs_user"
 
   # Asigna el grupo de seguridad a la instancia
   security_groups = [aws_security_group.my_security_group.name]

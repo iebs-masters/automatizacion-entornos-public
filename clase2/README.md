@@ -1,3 +1,7 @@
+# Instalación de Terraform
+
+La página web oficial para instalarlo es: [Install Terraform - Hashicorp](https://developer.hashicorp.com/terraform/install)
+
 # Comandos para la clase "Automatización de Entornos para VMs, Ansible"
 
 Creamos la infraestructura de terraform
@@ -14,7 +18,7 @@ Nos conectamos a la máquina con ansible con los ficheros de la carpeta ansible:
 # Debeis estar en la carpeta de ansible dentro de la carpeta clase2
 cd ansible
 
-# Cambiar el fichero iebs_user.pem y la IP_PUBLICA por los vuestros
+        # Cambiar el fichero iebs_user.pem y la IP_PUBLICA por los vuestros
 scp -i iebs_user.pem ./apache.yml ./inventory.yml ./iebs_user.pem ubuntu@<IP_PUBLICA>:/home/ubuntu
 
 ssh -i "iebs_user.pem" ubuntu@<IP_PUBLICA>

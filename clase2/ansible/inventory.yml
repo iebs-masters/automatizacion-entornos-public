@@ -1,8 +1,8 @@
 all:
   vars:
     ansible_user: ubuntu
-    ansible_ssh_private_key_file: /home/ubuntu/iebs_user.pem
+    ansible_ssh_private_key_file: /home/ubuntu/automatizacion_entornos.pem
   children:
     apache:
       hosts:
-        ec2-15-237-253-115.eu-west-3.compute.amazonaws.com:
+        ec2-15-237-188-62.eu-west-3.compute.amazonaws.com:
